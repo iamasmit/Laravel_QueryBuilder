@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Cast\String_;
 
 class StudentController extends Controller
 {
@@ -37,26 +38,16 @@ class StudentController extends Controller
         }
     }
 
-    public function addStudent()
+    public function addStudent(Request $request)
     {
         $students = DB::table('students')->insert([
             [
-                'name' => 'Hari',
-                'email' => 'hari@gmail.com',
-                'age' => 30,
-                'city' =>  'Kathmandu',
-                'created_at' => now(),
-                'updated_at' => now()
+                'name' => $request->name,
+                'email' => $request->email,
+                'age' => $request->age,
+                'city' =>  $request->city
 
-            ],
-            [
-                'name' => 'Ram',
-                'email' => 'ram@gmail.com',
-                'age' => 20,
-                'city' =>  'Biratnagar',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
+            ]
 
         ]);
         if ($students) {
@@ -64,11 +55,19 @@ class StudentController extends Controller
         }
     }
 
-    public function updateStudent()
+    public function updateView(String $id)
     {
-        $student = DB::table('students')->where('id', 4)->update([
-            'created_at' => now(),
-            'updated_at' => now()
+        $student = DB::table('students')->find($id);
+        return view('update', ['data' => $student]);
+    }
+
+    public function updateStudent(Request $request, String $id)
+    {
+        $student = DB::table('students')->where('id', $id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'age' => $request->age,
+            'city' =>  $request->city
         ]);
         if ($student) {
             echo "Updated SuccessFully";

@@ -12,6 +12,7 @@
         <div class="row">
             <div class="col-6">
                 <h1>List Of Students Data</h1>
+                <a href="newstudent" class="btn btn-primary btn-sm ml-6">Add New</a>
                 <table class="table table-bordered table-striped">
                     <tr>
                         <th>Name</th>
@@ -20,6 +21,7 @@
                         <th>City</th>
                         <th>View</th>
                         <th>Delete</th>
+                        <th>Update</th>
                     </tr>
                     @foreach ($data as $id => $student )
                     
@@ -30,6 +32,7 @@
                         <td>{{$student->city}}</td>
                         <td ><a href="{{route('view.student', $student->id)}}" class="btn btn-primary btn-sm">view</a></td>
                         <td ><a href="{{route('delete.student', $student->id)}}" class="btn btn-danger btn-sm">Delete</a></td>
+                        <td ><a href="{{route('update.view', $student->id)}}" class="btn btn-warning btn-sm">Update</a></td>
                     </tr>
                         
                     @endforeach
