@@ -10,7 +10,8 @@ class StudentController extends Controller
 {
     public function showStudent()
     {
-        $students = DB::table('students')->orderBy('id', 'desc')->get();
+        $students = DB::table('students')->orderBy('id', 'desc')
+            ->simplePaginate(2);
         // return $students;
 
         // dump($students);

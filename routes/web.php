@@ -6,15 +6,16 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::controller(StudentController::class)->group(function () {
+    Route::get('allstudent',  'showStudent');
+    Route::post('addstudent',  'addStudent');
 
-Route::get('allstudent', [StudentController::class, 'showStudent']);
-Route::post('addstudent', [StudentController::class, 'addStudent']);
-Route::view('newstudent', '/add'); //last one add is page name
+    Route::put('update/{id}',  'updateStudent')->name('update.student');
 
-Route::post('update/{id}', [StudentController::class, 'updateStudent'])->name('update.student');
-
-Route::get('updateview/{id}', [StudentController::class, 'updateView'])->name('update.view'); //this line used to view data in update input field
+    Route::get('updateview/{id}',  'updateView')->name('update.view'); //this line used to view data in update input field
 
 
-Route::get('delete/{id}', [StudentController::class, 'deleteStudent'])->name('delete.student');
-Route::get('view/{id}', [StudentController::class, 'singleStudent'])->name('view.student');
+    Route::get('delete/{id}',  'deleteStudent')->name('delete.student');
+    Route::get('view/{id}',  'singleStudent')->name('view.student');
+});
+Route::view('newstudent', '/add'); //last one add is pge name

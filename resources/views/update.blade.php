@@ -14,6 +14,7 @@
                 <h3>Update Student Data</h3>
                 <form action="{{ route('update.student', $data->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label class="form-label">Name</label>
                         <input type="text" value="{{ $data->name }}" class="form-control" name="name">
